@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>醇香酒单 - 品味生活的艺术</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#8B0000', // 深红色作为主色调
+            secondary: '#D2B48C', // 棕褐色作为辅助色
+            neutral: '#F5F5DC', // 米白色作为中性色
+            dark: '#333333', // 深灰色用于文本
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Merriweather', 'Georgia', 'serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .wine-card-shadow {
+        box-shadow: 0 10px 25px -5px rgba(139, 0, 0, 0.1), 0 8px 10px -6px rgba(139, 0, 0, 0.1);
+      }
+      .wine-card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .wine-card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(139, 0, 0, 0.15), 0 10px 10px -5px rgba(139, 0, 0, 0.1);
+      }
+      .nav-scrolled {
+        @apply bg-white bg-opacity-95 shadow-md;
+      }
+      .hero-gradient {
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('https://picsum.photos/id/431/1200/600');
+        background-size: cover;
+        background-position: center;
+      }
+    }
+  </style>
+</head>
+<body class="bg-neutral text-dark">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+    <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-2xl font-serif font-bold text-primary flex items-center">
+        <i class="fa fa-glass mr-2"></i>
+        <span>醇香酒单</span>
+      </a>
+      
+      <!-- 桌面导航 -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="font-medium hover:text-primary transition-colors">首页</a>
+        <a href="#categories" class="font-medium hover:text-primary transition-colors">分类</a>
+        <a href="#featured" class="font-medium hover:text-primary transition-colors">精选</a>
+        <a href="#about" class="font-medium hover:text-primary transition-colors">关于我们</a>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </nav>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+        <a href="#home" class="font-medium py-2 hover:text-primary transition-colors">首页</a>
+        <a href="#categories" class="font-medium py-2 hover:text-primary transition-colors">分类</a>
+        <a href="#featured" class="font-medium py-2 hover:text-primary transition-colors">精选</a>
+        <a href="#about" class="font-medium py-2 hover:text-primary transition-colors">关于我们</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section id="home" class="hero-gradient h-screen flex items-center">
+    <div class="container mx-auto px-4 text-white">
+      <div class="max-w-2xl">
+        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-serif font-bold leading-tight mb-4">
+          探索世界顶级<br>葡萄酒的奇妙旅程
+        </h1>
+        <p class="text-[clamp(1rem,2vw,1.25rem)] mb-8 text-white/90">
+          精选来自世界各地的优质葡萄酒，满足您对品质和口感的追求。
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#featured" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-colors">
+            探索酒单
+          </a>
+          <a href="#about" class="bg-white/20 hover:bg-white/30 text-white font-medium py-3 px-6 rounded-md transition-colors">
+            了解更多
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分类导航 -->
+  <section id="categories" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-serif font-bold mb-4">按分类浏览</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">我们提供多种类型的优质葡萄酒，从干红到甜白，从气泡酒到加强型葡萄酒，总有一款适合您的口味。</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <a href="#red-wine" class="category-card bg-red-50 hover:bg-red-100 rounded-lg p-6 text-center transition-colors wine-card-hover">
+          <i class="fa fa-glass text-3xl text-primary mb-3"></i>
+          <h3 class="font-medium">红葡萄酒</h3>
+        </a>
+        <a href="#white-wine" class="category-card bg-yellow-50 hover:bg-yellow-100 rounded-lg p-6 text-center transition-colors wine-card-hover">
+          <i class="fa fa-glass text-3xl text-yellow-600 mb-3"></i>
+          <h3 class="font-medium">白葡萄酒</h3>
+        </a>
+        <a href="#rose-wine" class="category-card bg-pink-50 hover:bg-pink-100 rounded-lg p-6 text-center transition-colors wine-card-hover">
+          <i class="fa fa-glass text-3xl text-pink-400 mb-3"></i>
+          <h3 class="font-medium">桃红葡萄酒</h3>
+        </a>
+        <a href="#sparkling-wine" class="category-card bg-amber-50 hover:bg-amber-100 rounded-lg p-6 text-center transition-colors wine-card-hover">
+          <i class="fa fa-glass text-3xl text-amber-400 mb-3"></i>
+          <h3 class="font-medium">气泡酒</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 酒单展示 -->
+  <section id="featured" class="py-16 bg-neutral/50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-serif font-bold mb-4">精选酒款</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">我们精心挑选的优质葡萄酒，每一款都代表了其产区的独特风土和酿酒师的精湛技艺。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 红酒 1 -->
+        <div class="wine-card bg-white rounded-xl overflow-hidden wine-card-shadow wine-card-hover" data-wine-id="1">
+          <div class="relative h-64">
+            <img src="https://picsum.photos/id/237/400/300" alt="波尔多红葡萄酒" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-primary text-white text-sm font-medium py-1 px-3 rounded-full">
+              红葡萄酒
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold mb-2">波尔多特级红葡萄酒</h3>
+            <div class="flex justify-between items-center mb-3">
+              <div class="flex items-center">
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star-half-o text-yellow-400"></i>
+                <span class="ml-2 text-sm text-gray-600">4.5 (120)</span>
+              </div>
+              <span class="text-primary font-bold">¥899</span>
+            </div>
+            <p class="text-gray-600 mb-4 line-clamp-2">来自法国波尔多产区的顶级红葡萄酒，采用传统工艺酿造，酒体饱满，单宁柔顺，带有黑莓、黑醋栗和香料的复杂香气。</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center text-sm text-gray-500">
+                <i class="fa fa-map-marker mr-1"></i>
+                <span>法国 · 波尔多</span>
+              </div>
+              <button class="view-details text-primary font-medium hover:text-primary/80 transition-colors">
+                查看详情 <i class="fa fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 白酒 1 -->
+        <div class="wine-card bg-white rounded-xl overflow-hidden wine-card-shadow wine-card-hover" data-wine-id="2">
+          <div class="relative h-64">
+            <img src="https://picsum.photos/id/225/400/300" alt="莎当妮白葡萄酒" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-yellow-600 text-white text-sm font-medium py-1 px-3 rounded-full">
+              白葡萄酒
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold mb-2">莎当妮干白葡萄酒</h3>
+            <div class="flex justify-between items-center mb-3">
+              <div class="flex items-center">
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star-o text-yellow-400"></i>
+                <span class="ml-2 text-sm text-gray-600">4.0 (95)</span>
+              </div>
+              <span class="text-primary font-bold">¥699</span>
+            </div>
+            <p class="text-gray-600 mb-4 line-clamp-2">来自意大利北部的莎当妮白葡萄酒，经过橡木桶陈酿，带有浓郁的热带水果和香草香气，口感丰富平衡，余味悠长。</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center text-sm text-gray-500">
+                <i class="fa fa-map-marker mr-1"></i>
+                <span>意大利 · 特伦蒂诺</span>
+              </div>
+              <button class="view-details text-primary font-medium hover:text-primary/80 transition-colors">
+                查看详情 <i class="fa fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 桃红 1 -->
+        <div class="wine-card bg-white rounded-xl overflow-hidden wine-card-shadow wine-card-hover" data-wine-id="3">
+          <div class="relative h-64">
+            <img src="https://picsum.photos/id/425/400/300" alt="普罗旺斯桃红葡萄酒" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-pink-400 text-white text-sm font-medium py-1 px-3 rounded-full">
+              桃红葡萄酒
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold mb-2">普罗旺斯桃红葡萄酒</h3>
+            <div class="flex justify-between items-center mb-3">
+              <div class="flex items-center">
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <span class="ml-2 text-sm text-gray-600">5.0 (156)</span>
+              </div>
+              <span class="text-primary font-bold">¥599</span>
+            </div>
+            <p class="text-gray-600 mb-4 line-clamp-2">来自法国普罗旺斯地区的经典桃红葡萄酒，色泽淡雅，带有草莓、覆盆子和柑橘的香气，口感清爽，非常适合搭配海鲜和沙拉。</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center text-sm text-gray-500">
+                <i class="fa fa-map-marker mr-1"></i>
+                <span>法国 · 普罗旺斯</span>
+              </div>
+              <button class="view-details text-primary font-medium hover:text-primary/80 transition-colors">
+                查看详情 <i class="fa fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 气泡酒 1 -->
+        <div class="wine-card bg-white rounded-xl overflow-hidden wine-card-shadow wine-card-hover" data-wine-id="4">
+          <div class="relative h-64">
+            <img src="https://picsum.photos/id/112/400/300" alt="香槟气泡酒" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-amber-400 text-white text-sm font-medium py-1 px-3 rounded-full">
+              气泡酒
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold mb-2">顶级香槟</h3>
+            <div class="flex justify-between items-center mb-3">
+              <div class="flex items-center">
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star-half-o text-yellow-400"></i>
+                <span class="ml-2 text-sm text-gray-600">4.7 (203)</span>
+              </div>
+              <span class="text-primary font-bold">¥1299</span>
+            </div>
+            <p class="text-gray-600 mb-4 line-clamp-2">来自法国香槟产区的顶级气泡酒，采用传统方法酿造，带有烤面包、柑橘和青苹果的复杂香气，气泡细腻持久，口感优雅。</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center text-sm text-gray-500">
+                <i class="fa fa-map-marker mr-1"></i>
+                <span>法国 · 香槟</span>
+              </div>
+              <button class="view-details text-primary font-medium hover:text-primary/80 transition-colors">
+                查看详情 <i class="fa fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 红酒 2 -->
+        <div class="wine-card bg-white rounded-xl overflow-hidden wine-card-shadow wine-card-hover" data-wine-id="5">
+          <div class="relative h-64">
+            <img src="https://picsum.photos/id/452/400/300" alt="巴罗莎设拉子红葡萄酒" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-primary text-white text-sm font-medium py-1 px-3 rounded-full">
+              红葡萄酒
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold mb-2">巴罗莎设拉子红葡萄酒</h3>
+            <div class="flex justify-between items-center mb-3">
+              <div class="flex items-center">
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star-o text-yellow-400"></i>
+                <span class="ml-2 text-sm text-gray-600">4.2 (87)</span>
+              </div>
+              <span class="text-primary font-bold">¥799</span>
+            </div>
+            <p class="text-gray-600 mb-4 line-clamp-2">来自澳大利亚巴罗莎谷的设拉子红葡萄酒，酒体饱满，带有黑莓、黑巧克力和香料的浓郁香气，单宁柔顺，余味悠长。</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center text-sm text-gray-500">
+                <i class="fa fa-map-marker mr-1"></i>
+                <span>澳大利亚 · 巴罗莎谷</span>
+              </div>
+              <button class="view-details text-primary font-medium hover:text-primary/80 transition-colors">
+                查看详情 <i class="fa fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 白酒 2 -->
+        <div class="wine-card bg-white rounded-xl overflow-hidden wine-card-shadow wine-card-hover" data-wine-id="6">
+          <div class="relative h-64">
+            <img src="https://picsum.photos/id/493/400/300" alt="长相思白葡萄酒" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-yellow-600 text-white text-sm font-medium py-1 px-3 rounded-full">
+              白葡萄酒
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold mb-2">新西兰长相思白葡萄酒</h3>
+            <div class="flex justify-between items-center mb-3">
+              <div class="flex items-center">
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star-half-o text-yellow-400"></i>
+                <span class="ml-2 text-sm text-gray-600">4.5 (112)</span>
+              </div>
+              <span class="text-primary font-bold">¥549</span>
+            </div>
+            <p class="text-gray-600 mb-4 line-clamp-2">来自新西兰马尔堡产区的长相思白葡萄酒，带有浓郁的热带水果、青柠和青椒的香气，口感清爽，酸度适中，是夏日绝佳选择。</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center text-sm text-gray-500">
+                <i class="fa fa-map-marker mr-1"></i>
+                <span>新西兰 · 马尔堡</span>
+              </div>
+              <button class="view-details text-primary font-medium hover:text-primary/80 transition-colors">
+                查看详情 <i class="fa fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <button class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-md transition-colors">
+          加载更多酒款
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我们 -->
+  <section id="about" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-serif font-bold mb-6">关于我们的酒单</h2>
+          <p class="text-gray-600 mb-6">
+            我们是一家专注于提供高品质葡萄酒的酒商，致力于为葡萄酒爱好者带来世界各地的优质佳酿。我们的酒单由专业的品酒师精心挑选，每一款酒都代表了其产区的独特风土和酿酒传统。
+          </p>
+          <p class="text-gray-600 mb-8">
+            无论您是葡萄酒鉴赏家还是刚刚开始探索葡萄酒世界的新手，我们都能为您提供专业的建议和推荐。我们相信，每一款葡萄酒都有其独特的故事和魅力，期待与您一起探索葡萄酒的奇妙世界。
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#featured" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-colors">
+              浏览酒单
+            </a>
+            <a href="#" class="border-2 border-primary text-primary hover:bg-primary/5 font-medium py-3 px-6 rounded-md transition-colors">
+              联系我们
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-4">
+            <img src="https://picsum.photos/id/429/300/400" alt="葡萄酒窖" class="rounded-lg shadow-lg h-48 w-full object-cover">
+            <img src="https://picsum.photos/id/431/300/400" alt="葡萄园" class="rounded-lg shadow-lg h-64 w-full object-cover">
+          </div>
+          <div class="space-y-4 pt-8">
+            <img src="https://picsum.photos/id/428/300/400" alt="葡萄酒品尝" class="rounded-lg shadow-lg h-64 w-full object-cover">
+            <img src="https://picsum.photos/id/430/300/400" alt="葡萄酒瓶" class="rounded-lg shadow-lg h-48 w-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 订阅区域 -->
+  <section class="py-16 bg-primary/10">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-serif font-bold mb-4">订阅我们的葡萄酒资讯</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+        订阅我们的邮件，获取最新的葡萄酒资讯、优惠活动和专业品鉴建议。
+      </p>
+      <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <input type="email" placeholder="您的邮箱地址" class="flex-grow px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary">
+        <button type="submit" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-colors whitespace-nowrap">
+          立即订阅
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <h3 class="text-xl font-serif font-bold mb-4">醇香酒单</h3>
+          <p class="text-gray-400 mb-6">
+            为您提供精选的全球优质葡萄酒，带您探索葡萄酒的奇妙世界。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-youtube-play"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="#categories" class="text-gray-400 hover:text-white transition-colors">分类浏览</a></li>
+            <li><a href="#featured" class="text-gray-400 hover:text-white transition-colors">精选酒款</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium mb-4">帮助中心</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">常见问题</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">配送信息</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">退换政策</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">隐私政策</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium mb-4">联系我们</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fa fa-map-marker mt-1 mr-3 text-gray-400"></i>
+              <span class="text-gray-400">北京市朝阳区建国路88号</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-phone mr-3 text-gray-400"></i>
+              <span class="text-gray-400">400-888-8888</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-envelope mr-3 text-gray-400"></i>
+              <span class="text-gray-400">contact@wine-menu.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2025 醇香酒单. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 酒款详情模态框 -->
+  <div id="wine-modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-auto">
+      <div class="relative">
+        <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="h-64 md:h-full">
+            <img id="modal-image" src="https://picsum.photos/id/237/600/800" alt="葡萄酒详情图" class="w-full h-full object-cover rounded-t-xl md:rounded-tr-none md:rounded-bl-xl">
+          </div>
+          <div class="p-6">
+            <span id="modal-category" class="inline-block bg-primary text-white text-sm font-medium py-1 px-3 rounded-full mb-4">红葡萄酒</span>
+            <h3 id="modal-title" class="text-2xl font-serif font-bold mb-2">波尔多特级红葡萄酒</h3>
+            <div class="flex items-center mb-4">
+              <div class="flex">
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star text-yellow-400"></i>
+                <i class="fa fa-star-half-o text-yellow-400"></i>
+              </div>
+              <span class="ml-2 text-sm text-gray-600">4.5 (120 评价)</span>
+            </div>
+            <div class="flex items-center mb-6">
+              <span id="modal-price" class="text-primary font-bold text-2xl">¥899</span>
+              <span class="ml-4 text-gray-500 line-through">¥1,299</span>
+              <span class="ml-4 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                节省 ¥400
+              </span>
+            </div>
+            
+            <div class="mb-6">
+              <h4 class="font-medium mb-2">详情描述</h4>
+              <p id="modal-description" class="text-gray-600">
+                来自法国波尔多产区的顶级红葡萄酒，采用传统工艺酿造，酒体饱满，单宁柔顺，带有黑莓、黑醋栗和香料的复杂香气。这款酒经过了18个月的橡木桶陈酿，口感丰富而平衡，余味悠长。适合搭配红肉、奶酪和烤肉等食物。最佳饮用温度为16-18°C。
+              </p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div>
+                <h4 class="font-medium mb-2">产地</h4>
+                <p id="modal-origin" class="text-gray-600">法国 · 波尔多</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2">年份</h4>
+                <p id="modal-year" class="text-gray-600">2016</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2">酒精度</h4>
+                <p id="modal-alcohol" class="text-gray-600">14.5%</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2">葡萄品种</h4>
+                <p id="modal-grape" class="text-gray-600">赤霞珠、梅洛</p>
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-4">
+              <button class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-colors flex-grow">
+                立即购买
+              </button>
+              <button class="border-2 border-primary text-primary hover:bg-primary/5 font-medium py-3 px-6 rounded-md transition-colors">
+                <i class="fa fa-shopping-cart mr-2"></i> 加入购物车
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+    
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // 关闭移动菜单
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+    
+    // 酒款详情模态框
+    const wineModal = document.getElementById('wine-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCategory = document.getElementById('modal-category');
+    const modalPrice = document.getElementById('modal-price');
+    const modalDescription = document.getElementById('modal-description');
+    const modalOrigin = document.getElementById('modal-origin');
+    const modalYear = document.getElementById('modal-year');
+    const modalAlcohol = document.getElementById('modal-alcohol');
+    const modalGrape = document.getElementById('modal-grape');
+    
+    // 酒款数据
+    const wineData = {
+      1: {
+        image: 'https://picsum.photos/id/237/600/800',
+        title: '波尔多特级红葡萄酒',
+        category: '红葡萄酒',
+        price: '¥899',
+        description: '来自法国波尔多产区的顶级红葡萄酒，采用传统工艺酿造，酒体饱满，单宁柔顺，带有黑莓、黑醋栗和香料的复杂香气。这款酒经过了18个月的橡木桶陈酿，口感丰富而平衡，余味悠长。适合搭配红肉、奶酪和烤肉等食物。最佳饮用温度为16-18°C。',
+        origin: '法国 · 波尔多',
+        year: '2016',
+        alcohol: '14.5%',
+        grape: '赤霞珠、梅洛'
+      },
+      2: {
+        image: 'https://picsum.photos/id/225/600/800',
+        title: '莎当妮干白葡萄酒',
+        category: '白葡萄酒',
+        price: '¥699',
+        description: '来自意大利北部的莎当妮白葡萄酒，经过橡木桶陈酿，带有浓郁的热带水果和香草香气，口感丰富平衡，余味悠长。这款酒在不锈钢桶中发酵，然后在法国橡木桶中陈酿8个月，赋予了它复杂的层次感和丰富的口感。适合搭配海鲜、鸡肉和意大利面等食物。最佳饮用温度为8-10°C。',
+        origin: '意大利 · 特伦蒂诺',
+        year: '2019',
+        alcohol: '13.5%',
+        grape: '莎当妮'
+      },
+      3: {
+        image: 'https://picsum.photos/id/425/600/800',
+        title: '普罗旺斯桃红葡萄酒',
+        category: '桃红葡萄酒',
+        price: '¥599',
+        description: '来自法国普罗旺斯地区的经典桃红葡萄酒，色泽淡雅，带有草莓、覆盆子和柑橘的香气，口感清爽，非常适合搭配海鲜和沙拉。这款酒采用歌海娜、西拉和神索等葡萄品种混酿而成，经过短暂的浸渍后进行低温发酵，保留了葡萄的天然果香和清爽酸度。最佳饮用温度为8-10°C。',
+        origin: '法国 · 普罗旺斯',
+        year: '2020',
+        alcohol: '12.5%',
+        grape: '歌海娜、西拉、神索'
+      },
+      4: {
+        image: 'https://picsum.photos/id/112/600/800',
+        title: '顶级香槟',
+        category: '气泡酒',
+        price: '¥1299',
+        description: '来自法国香槟产区的顶级气泡酒，采用传统方法酿造，带有烤面包、柑橘和青苹果的复杂香气，气泡细腻持久，口感优雅。这款酒由黑皮诺、霞多丽和莫尼耶皮诺三种葡萄混酿而成，在瓶中发酵36个月以上，赋予了它丰富的口感和复杂的香气。适合作为开胃酒或搭配甜点。最佳饮用温度为6-8°C。',
+        origin: '法国 · 香槟',
+        year: '2015',
+        alcohol: '12%',
+        grape: '黑皮诺、霞多丽、莫尼耶皮诺'
+      },
+      5: {
+        image: 'https://picsum.photos/id/452/600/800',
+        title: '巴罗莎设拉子红葡萄酒',
+        category: '红葡萄酒',
+        price: '¥799',
+        description: '来自澳大利亚巴罗莎谷的设拉子红葡萄酒，酒体饱满，带有黑莓、黑巧克力和香料的浓郁香气，单宁柔顺，余味悠长。这款酒产自巴罗莎谷的老藤葡萄园，葡萄树龄超过50年，赋予了葡萄酒更深的颜色和更浓郁的风味。适合搭配红肉、烧烤和浓郁的奶酪。最佳饮用温度为16-18°C。',
+        origin: '澳大利亚 · 巴罗莎谷',
+        year: '2017',
+        alcohol: '14.8%',
+        grape: '设拉子'
+      },
+      6: {
+        image: 'https://picsum.photos/id/493/600/800',
+        title: '新西兰长相思白葡萄酒',
+        category: '白葡萄酒',
+        price: '¥549',
+        description: '来自新西兰马尔堡产区的长相思白葡萄酒，带有浓郁的热带水果、青柠和青椒的香气，口感清爽，酸度适中，是夏日绝佳选择。这款酒在低温下发酵，保留了葡萄的天然果香和清爽酸度，带有典型的马尔堡长相思风格。适合搭配海鲜、沙拉和清淡的食物。最佳饮用温度为8-10°C。',
+        origin: '新西兰 · 马尔堡',
+        year: '2020',
+        alcohol: '13.2%',
+        grape: '长相思'
+      }
+    };
+    
+    // 打开模态框
+    document.querySelectorAll('.view-details').forEach(button => {
+      button.addEventListener('click', () => {
+        const wineCard = button.closest('.wine-card');
+        const wineId = wineCard.getAttribute('data-wine-id');
+        const wine = wineData[wineId];
+        
+        if (wine) {
+          modalImage.src = wine.image;
+          modalImage.alt = wine.title;
+          modalTitle.textContent = wine.title;
+          modalCategory.textContent = wine.category;
+          modalPrice.textContent = wine.price;
+          modalDescription.textContent = wine.description;
+          modalOrigin.textContent = wine.origin;
+          modalYear.textContent = wine.year;
+          modalAlcohol.textContent = wine.alcohol;
+          modalGrape.textContent = wine.grape;
+          
+          // 设置分类标签的颜色
+          if (wine.category === '红葡萄酒') {
+            modalCategory.className = 'inline-block bg-primary text-white text-sm font-medium py-1 px-3 rounded-full mb-4';
+          } else if (wine.category === '白葡萄酒') {
+            modalCategory.className = 'inline-block bg-yellow-600 text-white text-sm font-medium py-1 px-3 rounded-full mb-4';
+          } else if (wine.category === '桃红葡萄酒') {
+            modalCategory.className = 'inline-block bg-pink-400 text-white text-sm font-medium py-1 px-3 rounded-full mb-4';
+          } else if (wine.category === '气泡酒') {
+            modalCategory.className = 'inline-block bg-amber-400 text-white text-sm font-medium py-1 px-3 rounded-full mb-4';
+          }
+          
+          wineModal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+      });
+    });
+    
+    // 关闭模态框
+    closeModal.addEventListener('click', () => {
+      wineModal.classList.add('hidden');
+      document.body.style.overflow = 'auto'; // 恢复背景滚动
+    });
+    
+    // 点击模态框外部关闭
+    wineModal.addEventListener('click', (e) => {
+      if (e.target === wineModal) {
+        wineModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // 按ESC键关闭模态框
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !wineModal.classList.contains('hidden')) {
+        wineModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  </script>
+</body>
+</html>
+    
